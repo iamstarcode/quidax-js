@@ -43,7 +43,7 @@ class Quidax {
    */
   }
 }
+export default Quidax;
 export const Utils = {
   isWebhookSignatureValid,
 };
-export default Quidax;

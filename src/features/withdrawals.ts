@@ -47,8 +47,8 @@ class Withdrawals {
     currency: string;
     amount: string;
     fundUid: string;
-    transactionNote: string;
-    narration: string;
+    transactionNote?: string;
+    narration?: string;
     fundUid2?: string;
     network?: string;
   }): Promise<any | undefined> {

@@ -1,14 +1,14 @@
 {
   "name": "@iamstarcode/quidax-js",
   "author": "iamstarcode",
-  "version": "0.0.0-b10",
+  "version": "0.0.0-b11",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "publish": "pnpm build ; npm publish"
+    "pub": "echo 'Building...' && pnpm build && npm publish"
   },
   "keywords": [],
   "license": "ISC",
