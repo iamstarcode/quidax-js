@@ -14,8 +14,15 @@ importers:
       typescript:
         specifier: ^5.5.3
         version: 5.5.3
+    devDependencies:
+      '@types/node':
+        specifier: ^22.3.0
+        version: 22.3.0
 
 packages:
+
+  '@types/node@22.3.0':
+    resolution: {integrity: sha512-nrWpWVaDZuaVc5X84xJ0vNrLvomM205oQyLsRt7OHNZbSHslcWsvgFR7O7hire2ZonjLrWBbedmotmIlJDVd6g==}
 
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
@@ -60,7 +67,14 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@6.18.2:
+    resolution: {integrity: sha512-5ruQbENj95yDYJNS3TvcaxPMshV7aizdv/hWYjGIKoANWKjhWNBsr2YEuYZKodQulB1b8l7ILOuDQep3afowQQ==}
+
 snapshots:
+
+  '@types/node@22.3.0':
+    dependencies:
+      undici-types: 6.18.2
 
   asynckit@0.4.0: {}
 
@@ -95,3 +109,5 @@ snapshots:
   proxy-from-env@1.1.0: {}
 
   typescript@5.5.3: {}
+
+  undici-types@6.18.2: {}

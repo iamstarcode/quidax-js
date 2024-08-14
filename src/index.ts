@@ -5,6 +5,7 @@ import Withdrawals from './features/withdrawals';
 import Swap from './features/swap';
 import Fee from './features/fee';
 import Deposit from './features/deposit';
+import { isWebhookSignatureValid } from './utils';
 
 class Quidax {
   apiKey: string;
@@ -42,5 +43,7 @@ class Quidax {
    */
   }
 }
-
+export const Utils = {
+  isWebhookSignatureValid,
+};
 export default Quidax;
