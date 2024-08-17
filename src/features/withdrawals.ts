@@ -7,12 +7,12 @@ import CustomError from '../errors';
  * @param {string} merchantId - The id of the merchant
  */
 class Withdrawals {
-  public base_url: string;
+  public baseUrl: string;
 
   public options: { headers: { Authorization: string } };
 
   constructor(public apiKey: string) {
-    this.base_url = 'https://www.quidax.com/api/v1';
+    this.baseUrl = 'https://www.quidax.com/api/v1';
     this.options = {
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -54,7 +54,7 @@ class Withdrawals {
   }): Promise<any | undefined> {
     try {
       const response = await axios.post(
-        `${this.base_url}/users/${userId}/withdraws`,
+        `${this.baseUrl}/users/${userId}/withdraws`,
         {
           currency,
           amount,
@@ -82,16 +82,30 @@ class Withdrawals {
     return null;
   }
 
-  /*   public async getWithdrawal({
+  public async getWithdrawalDetail({
     userId,
-    despositId,
+    withdrawalId,
   }: {
     userId: string;
-    despositId: string;
+    withdrawalId: string;
   }) {
+    try {
+      const response = await axios.get(
+        `${this.baseUrl}/users/${userId}/withdraws/${withdrawalId}`,
+        this.options
+      );
 
+      const { data } = response;
+      if (data?.response?.status > 300) {
+        throw Error(data);
+      }
 
-  } */
+      return data;
+    } catch (error) {
+      CustomError.processError(error);
+    }
+    return null;
+  }
 }
 
 export default Withdrawals;
