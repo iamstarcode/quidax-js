@@ -1,5 +1,6 @@
 import axios from 'axios';
 import CustomError from '../errors';
+import handleError from '../errors/handleError';
 
 class Deposit {
   public baseUrl: string;
@@ -29,7 +30,7 @@ class Deposit {
 
       return data;
     } catch (error) {
-      CustomError.processError(error);
+      throw handleError(error);
     }
     return null;
   }

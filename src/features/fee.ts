@@ -1,5 +1,6 @@
-import axios from "axios";
-import CustomError from "../errors";
+import axios from 'axios';
+import CustomError from '../errors';
+import handleError from '../errors/handleError';
 
 class Fee {
   public baseUrl: string;
@@ -7,7 +8,7 @@ class Fee {
   public options: { headers: { Authorization: string } };
 
   constructor(public apiKey: string) {
-    this.baseUrl = "https://www.quidax.com/api/v1/fee";
+    this.baseUrl = 'https://www.quidax.com/api/v1/fee';
     this.options = {
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -32,7 +33,7 @@ class Fee {
 
       return data;
     } catch (error) {
-      CustomError.processError(error);
+      throw handleError(error);
     }
     return null;
   }

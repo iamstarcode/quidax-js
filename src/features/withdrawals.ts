@@ -1,5 +1,6 @@
 import axios from 'axios';
 import CustomError from '../errors';
+import handleError from '../errors/handleError';
 /**
  * The quidax module for handling all quidax related operations.
  * @class Quidax
@@ -76,7 +77,7 @@ class Withdrawals {
 
       return data;
     } catch (error) {
-      CustomError.processError(error);
+      throw handleError(error);
     }
 
     return null;
@@ -102,7 +103,7 @@ class Withdrawals {
 
       return data;
     } catch (error) {
-      CustomError.processError(error);
+      throw handleError(error);
     }
     return null;
   }

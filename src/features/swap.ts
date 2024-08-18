@@ -69,7 +69,6 @@ class Swap {
 
       return response.data;
     } catch (error) {
-      // CustomError.processError(error);
       throw handleError(error);
     }
   }
@@ -105,11 +104,32 @@ class Swap {
 
       return response.data;
     } catch (error) {
-      // CustomError.processError(error);
       throw handleError(error);
     }
+  }
 
-    return null;
+  public async getSwapTransaction({
+    userId,
+    transactionId,
+  }: {
+    userId: string;
+    transactionId: string;
+  }) {
+    try {
+      const response = await axios.get(
+        `${this.baseUrl}/${userId}/swap_transactions/${transactionId}/refresh`,
+        this.options
+      );
+
+      const { data } = response;
+      if (data?.response?.status > 300) {
+        throw Error(data);
+      }
+
+      return data;
+    } catch (error) {
+      throw handleError(error);
+    }
   }
 }
 
