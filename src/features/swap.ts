@@ -67,7 +67,7 @@ class Swap {
         throw Error(data);
       }
 
-      return response.data;
+      return data;
     } catch (error) {
       throw handleError(error);
     }
