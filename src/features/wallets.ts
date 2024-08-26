@@ -21,6 +21,88 @@ class Wallets {
     };
   }
 
+  public async getUserWallets(userId: string) {
+    try {
+      const response = await axios.get(
+        `${this.baseUrl}/users/${userId}/wallets`,
+        this.options
+      );
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  }
+
+  public async getUserWallet(userId: string, currency: string) {
+    try {
+      const response = await axios.get(
+        `${this.baseUrl}/users/${userId}/wallets/${currency}`,
+        this.options
+      );
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  }
+
+  public async getPaymentAddress(userId: string, currency: string) {
+    try {
+      const response = await axios.get(
+        `${this.baseUrl}/users/${userId}/wallets/${currency}/address`,
+        this.options
+      );
+
+      const { data } = response;
+      if (data?.response?.status > 300) {
+        throw Error(data);
+      }
+
+      return data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  }
+
+  public async getPaymentAddresses(userId: string, currency: string) {
+    try {
+      const response = await axios.get(
+        `${this.baseUrl}/users/${userId}/wallets/${currency}/addresses`,
+        this.options
+      );
+
+      const { data } = response;
+      if (data?.response?.status > 300) {
+        throw Error(data);
+      }
+
+      return data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  }
+
+  public async getPaymentAddressById(
+    userId: string,
+    currency: string,
+    addressId: string
+  ) {
+    try {
+      const response = await axios.get(
+        `${this.baseUrl}/users/${userId}/wallets/${currency}/addresses/${addressId}`,
+        this.options
+      );
+
+      const { data } = response;
+      if (data?.response?.status > 300) {
+        throw Error(data);
+      }
+
+      return data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  }
+
   public async createPaymentAddress(
     userId: string,
     currency: string,
@@ -46,75 +128,7 @@ class Wallets {
     } catch (error) {
       throw handleError(error);
     }
-
-    return null;
   }
-
-  public async getPaymentAddressById(
-    userId: string,
-    currency: string,
-    addressId: string
-  ) {
-    try {
-      const response = await axios.get(
-        `${this.baseUrl}/users/${userId}/wallets/${currency}/addresses/${addressId}`,
-        this.options
-      );
-
-      const { data } = response;
-      if (data?.response?.status > 300) {
-        throw Error(data);
-      }
-
-      return data;
-    } catch (error) {
-      throw handleError(error);
-    }
-
-    return null;
-  }
-
-  public async getUserWallet(userId: string, currency: string) {
-    try {
-      const response = await axios.get(
-        `${this.baseUrl}/users/${userId}/wallets/${currency}`,
-        this.options
-      );
-      return response.data;
-    } catch (error) {
-      throw handleError(error);
-    }
-
-    return null;
-  }
-
-  public async getUserWallets(userId: string) {
-    try {
-      const response = await axios.get(
-        `${this.baseUrl}/users/${userId}/wallets`,
-        this.options
-      );
-      return response.data;
-    } catch (error) {
-      throw handleError(error);
-    }
-    return null;
-  }
-  /*  
-  public async get_payment_addresses(userId: string, currency: string) {
-    try {
-      const response = await axios.get(
-        `${this.base_url}/users/${userId}/wallets/${currency}/addresses`,
-        this.options,
-      );
-      return response.data;
-    } catch (error) {
-      throw handleError(error);
-    }
-  }
-
-
-   */
 }
 
 export default Wallets;
