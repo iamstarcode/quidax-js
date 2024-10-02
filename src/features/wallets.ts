@@ -53,9 +53,6 @@ class Wallets {
       );
 
       const { data } = response;
-      if (data?.response?.status > 300) {
-        throw Error(data);
-      }
 
       return data;
     } catch (error) {
@@ -71,9 +68,6 @@ class Wallets {
       );
 
       const { data } = response;
-      if (data?.response?.status > 300) {
-        throw Error(data);
-      }
 
       return data;
     } catch (error) {
@@ -93,9 +87,6 @@ class Wallets {
       );
 
       const { data } = response;
-      if (data?.response?.status > 300) {
-        throw Error(data);
-      }
 
       return data;
     } catch (error) {
@@ -120,9 +111,6 @@ class Wallets {
       const response = await axios.post(url, null, this.options);
 
       const { data } = response;
-      if (data?.response?.status > 300) {
-        throw Error(data);
-      }
 
       return data;
     } catch (error) {
