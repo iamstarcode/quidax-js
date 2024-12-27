@@ -108,6 +108,39 @@ class Swap {
     }
   }
 
+  public async temporarySwapQuotation({
+    userId,
+    fromAmount,
+    toCurrency,
+    fromCurrency,
+  }: {
+    userId: string;
+    fromCurrency: string;
+    toCurrency: string;
+    fromAmount: string;
+  }) {
+    const body = {
+      from_currency: fromCurrency,
+      to_currency: toCurrency,
+      from_amount: fromAmount,
+    };
+    try {
+      const response = await axios.post(
+        `${this.baseUrl}/${userId}/temporary_swap_quotation`,
+        body,
+        this.options
+      );
+      const { data } = response;
+      if (data?.response?.status > 300) {
+        throw Error(data);
+      }
+
+      return response.data;
+    } catch (error) {
+      throw handleError(error);
+    }
+  }
+
   public async getSwapTransaction({
     userId,
     transactionId,
