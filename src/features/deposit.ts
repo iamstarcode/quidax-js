@@ -1,6 +1,6 @@
 import axios from 'axios';
-import CustomError from '../errors';
 import handleError from '../errors/handleError';
+import { BASE_URL } from '../constants';
 
 class Deposit {
   public baseUrl: string;
@@ -8,7 +8,7 @@ class Deposit {
   public options: { headers: { Authorization: string } };
 
   constructor(public apiKey: string) {
-    this.baseUrl = 'https://www.quidax.com/api/v1/users';
+    this.baseUrl = `${BASE_URL}/users`;
     this.options = {
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -32,7 +32,6 @@ class Deposit {
     } catch (error) {
       throw handleError(error);
     }
-    return null;
   }
 }
 

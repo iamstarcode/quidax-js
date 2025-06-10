@@ -5,10 +5,6 @@ const isWebhookSignatureValid = (req: any, signatureSecret: string) => {
     'quidax-signature'
   ] as string;
 
-  // t=1718806888,s=3f7ab69b380fbe344ea48cf67be33d73177f3d5ec3bc6fb919df525a62b1ef7d
-  // console.log(quidaxSignatureHeader, "quidax header");
-  // console.log(req.body, "body");
-
   const [timestampSection, signatureSection] = quidaxSignatureHeader.split(',');
 
   const [, timestamp] = timestampSection.split('=');

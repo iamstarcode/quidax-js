@@ -1,6 +1,6 @@
 import axios from 'axios';
-import CustomError from '../errors';
 import handleError from '../errors/handleError';
+import { BASE_URL } from '../constants';
 /**
  * The quidax module for handling all quidax related operations.
  * @class Quidax
@@ -13,7 +13,7 @@ class Markets {
   public options: { headers: { Authorization: string } };
 
   constructor(public apiKey: string) {
-    this.baseUrl = 'https://www.quidax.com/api/v1/markets';
+    this.baseUrl = `${BASE_URL}/markets`;
     this.options = {
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -34,8 +34,6 @@ class Markets {
     } catch (error) {
       throw handleError(error);
     }
-
-    return null;
   }
 
   public async getMarketTicker(currency: string) {
@@ -53,8 +51,6 @@ class Markets {
     } catch (error) {
       throw handleError(error);
     }
-
-    return null;
   }
 }
 

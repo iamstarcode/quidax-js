@@ -1,6 +1,6 @@
 import axios from 'axios';
-import CustomError from '../errors';
 import handleError from '../errors/handleError';
+import { BASE_URL } from '../constants';
 /**
  * The quidax module for handling all quidax related operations.
  * @class Quidax
@@ -13,7 +13,7 @@ class Wallets {
   public options: { headers: { Authorization: string } };
 
   constructor(public apiKey: string) {
-    this.baseUrl = 'https://www.quidax.com/api/v1';
+    this.baseUrl = BASE_URL;
     this.options = {
       headers: {
         Authorization: `Bearer ${apiKey}`,
