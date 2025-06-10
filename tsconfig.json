@@ -11,5 +11,13 @@
     "skipLibCheck": true,
     "rootDir": "src",
     "outDir": "lib"
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "lib",
+    "test",
+    "tests",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }

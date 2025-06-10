@@ -39,6 +39,7 @@ class Wallets {
         `${this.baseUrl}/users/${userId}/wallets/${currency}`,
         this.options
       );
+
       return response.data;
     } catch (error) {
       throw handleError(error);
