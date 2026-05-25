@@ -1,0 +1,26 @@
+{
+  "name": "@iamstarcode/quidax-js-v1",
+  "publishConfig": {
+    "name": "@iamstarcode/quidax-js"
+  },
+  "author": "iamstarcode",
+  "version": "0.1.1",
+  "description": "Quidax API v1 client library for Node.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "pub": "pnpm build && npm publish"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "ts-node": "^10.9.2"
+  }
+}

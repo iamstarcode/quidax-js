@@ -1,24 +1,12 @@
 {
-  "name": "@iamstarcode/quidax-js",
-  "author": "iamstarcode",
-  "version": "0.1.1",
-  "description": "",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "name": "quidax-js-monorepo",
+  "private": true,
   "scripts": {
-    "test": "jest",
-    "build": "tsc",
-    "pub": "echo 'Building...' && pnpm build && npm publish"
-  },
-  "keywords": [],
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^1.7.2",
-    "typescript": "^5.5.3"
-  },
-  "devDependencies": {
-    "@types/node": "^22.7.4",
-    "ts-node": "^10.9.2"
-  },
-  "packageManager": "pnpm@9.14.4+sha512.c8180b3fbe4e4bca02c94234717896b5529740a6cbadf19fa78254270403ea2f27d4e1d46a08a0f56c89b63dc8ebfd3ee53326da720273794e6200fcf0d184ab"
+    "build:v1": "pnpm --filter @iamstarcode/quidax-js-v1 build",
+    "build:v3": "pnpm --filter @iamstarcode/quidax-js-v3 build",
+    "build": "pnpm build:v1 && pnpm build:v3",
+    "publish:v1": "pnpm build:v1 && pnpm --filter @iamstarcode/quidax-js-v1 publish",
+    "publish:v3": "pnpm build:v3 && pnpm --filter @iamstarcode/quidax-js-v3 publish --tag v3",
+    "test:e2e": "pnpm --filter @iamstarcode/quidax-js-v3 test:e2e"
+  }
 }
