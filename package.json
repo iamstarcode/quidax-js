@@ -3,10 +3,10 @@
   "private": true,
   "scripts": {
     "build:v1": "pnpm --filter @iamstarcode/quidax-js-v1 build",
-    "build:v3": "pnpm --filter @iamstarcode/quidax-js-v3 build",
+    "build:v3": "pnpm --filter @iamstarcode/quidax-js build",
     "build": "pnpm build:v1 && pnpm build:v3",
     "publish:v1": "pnpm build:v1 && pnpm --filter @iamstarcode/quidax-js-v1 publish",
-    "publish:v3": "pnpm build:v3 && pnpm --filter @iamstarcode/quidax-js-v3 publish --tag v3",
-    "test:e2e": "pnpm --filter @iamstarcode/quidax-js-v3 test:e2e"
+    "publish:v3": "pnpm build:v3 && cd packages/quidax-js-v3 && npm publish --tag v3-latest",
+    "test:e2e": "pnpm --filter @iamstarcode/quidax-js test:e2e"
   }
 }

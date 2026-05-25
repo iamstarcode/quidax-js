@@ -6,7 +6,7 @@
     "dev": "node --watch src/index.js"
   },
   "dependencies": {
-    "@iamstarcode/quidax-js-v3": "workspace:*",
+    "@iamstarcode/quidax-js": "workspace:*",
     "express": "^4.21.0"
   }
 }

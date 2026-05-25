@@ -1,8 +1,5 @@
 {
-  "name": "@iamstarcode/quidax-js-v3",
-  "publishConfig": {
-    "name": "@iamstarcode/quidax-js"
-  },
+  "name": "@iamstarcode/quidax-js",
   "author": "iamstarcode",
   "version": "3.0.0",
   "description": "Quidax API v3 client library for Node.js",
@@ -12,7 +9,7 @@
     "test": "jest",
     "test:e2e": "jest --config jest.e2e.config.js",
     "build": "tsc",
-    "pub": "pnpm build && pnpm publish --tag v3-latest --no-git-checks"
+    "pub": "pnpm build && npm publish --tag v3-latest"
   },
   "engines": {
     "node": ">=18"

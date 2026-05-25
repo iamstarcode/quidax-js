@@ -1,5 +1,5 @@
 const express = require('express');
-const Quidax = require('@iamstarcode/quidax-js-v3').default;
+const Quidax = require('@iamstarcode/quidax-js').default;
 
 const app = express();
 const PORT = process.env.PORT || 3000;

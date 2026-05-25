@@ -10,7 +10,7 @@ importers:
 
   apps/test-app:
     dependencies:
-      '@iamstarcode/quidax-js-v3':
+      '@iamstarcode/quidax-js':
         specifier: workspace:*
         version: link:../../packages/quidax-js-v3
       express:

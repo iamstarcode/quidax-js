@@ -1,8 +1,5 @@
 {
   "name": "@iamstarcode/quidax-js-v1",
-  "publishConfig": {
-    "name": "@iamstarcode/quidax-js"
-  },
   "author": "iamstarcode",
   "version": "0.1.1",
   "description": "Quidax API v1 client library for Node.js",
