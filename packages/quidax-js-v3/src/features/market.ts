@@ -1,59 +1,38 @@
 import { HttpClient } from '../client/HttpClient';
-import {
+import type { ApiResponse } from '../types';
+import type {
   Market,
-  MarketTicker,
   RawTickerEntry,
+  TickerData,
   KLine,
   OrderBook,
   DepthData,
   MarketSummary,
 } from '../types';
 
+type SingleTicker = RawTickerEntry & { market: string };
+
 export class Markets {
   constructor(private client: HttpClient) {}
 
-  async listAllMarkets(): Promise<Market[]> {
-    const raw = await this.client.get<Record<string, Market>>('/markets', {
-      auth: false,
-    });
-    return Object.values(raw);
+  listAllMarkets(): Promise<ApiResponse<Market[]>> {
+    return this.client.get<ApiResponse<Market[]>>('/markets', { auth: false });
   }
 
-  async getMarketTickers(): Promise<MarketTicker[]> {
-    const raw = await this.client.get<Record<string, RawTickerEntry>>(
+  getMarketTickers(): Promise<ApiResponse<Record<string, RawTickerEntry>>> {
+    return this.client.get<ApiResponse<Record<string, RawTickerEntry>>>(
       '/markets/tickers',
       { auth: false }
     );
-    return Object.entries(raw).map(([market, entry]) => ({
-      market,
-      at: entry.at,
-      buy: entry.ticker.buy,
-      sell: entry.ticker.sell,
-      low: entry.ticker.low,
-      high: entry.ticker.high,
-      last: entry.ticker.last,
-      open: entry.ticker.open,
-      vol: entry.ticker.vol,
-    }));
   }
 
-  async getMarketTicker(market: string): Promise<MarketTicker> {
-    const raw = await this.client.get<Record<string, RawTickerEntry>>(
+  getMarketTicker(
+    market: string
+  ): Promise<ApiResponse<SingleTicker>> {
+    return this.client.get<ApiResponse<SingleTicker>>(
       `/markets/tickers/${market}`,
       { auth: false }
     );
-    const entry = raw[market];
-    return {
-      market,
-      at: entry.at,
-      buy: entry.ticker.buy,
-      sell: entry.ticker.sell,
-      low: entry.ticker.low,
-      high: entry.ticker.high,
-      last: entry.ticker.last,
-      open: entry.ticker.open,
-      vol: entry.ticker.vol,
-    };
   }
 
   getKLine(
@@ -64,34 +43,42 @@ export class Markets {
       after?: number;
       limit?: number;
     }
-  ): Promise<KLine[]> {
-    return this.client.get<KLine[]>(`/markets/${market}/k-line`, {
-      params: {
-        period: params?.period?.toString(),
-        before: params?.before?.toString(),
-        after: params?.after?.toString(),
-        limit: params?.limit?.toString(),
-      },
-    });
+  ): Promise<ApiResponse<KLine[]>> {
+    return this.client.get<ApiResponse<KLine[]>>(
+      `/markets/${market}/k-line`,
+      {
+        params: {
+          period: params?.period?.toString(),
+          before: params?.before?.toString(),
+          after: params?.after?.toString(),
+          limit: params?.limit?.toString(),
+        },
+      }
+    );
   }
 
-  getKLinePending(market: string): Promise<KLine[]> {
-    return this.client.get<KLine[]>(`/markets/${market}/k-line/pending`);
+  getKLinePending(market: string): Promise<ApiResponse<KLine[]>> {
+    return this.client.get<ApiResponse<KLine[]>>(
+      `/markets/${market}/k-line/pending`
+    );
   }
 
-  getOrderBook(market: string): Promise<OrderBook> {
-    return this.client.get<OrderBook>(`/markets/${market}/order_book`);
+  getOrderBook(market: string): Promise<ApiResponse<OrderBook>> {
+    return this.client.get<ApiResponse<OrderBook>>(
+      `/markets/${market}/order_book`
+    );
   }
 
-  getDepthData(market: string): Promise<DepthData> {
-    return this.client.get<DepthData>(`/markets/${market}/depth`);
+  getDepthData(market: string): Promise<ApiResponse<DepthData>> {
+    return this.client.get<ApiResponse<DepthData>>(
+      `/markets/${market}/depth`
+    );
   }
 
-  async getMarketsSummary(): Promise<MarketSummary[]> {
-    const raw = await this.client.get<Record<string, MarketSummary>>(
+  getMarketsSummary(): Promise<ApiResponse<Record<string, MarketSummary>>> {
+    return this.client.get<ApiResponse<Record<string, MarketSummary>>>(
       '/markets/summary',
       { auth: false }
     );
-    return Object.values(raw);
   }
 }

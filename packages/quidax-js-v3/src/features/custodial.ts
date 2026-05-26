@@ -1,4 +1,5 @@
 import { HttpClient } from '../client/HttpClient';
+import type { ApiResponse } from '../types';
 import {
   CustodialTransaction,
   BankAccount,
@@ -11,8 +12,8 @@ export class Custodial {
 
   initiateOnRampTransaction(
     data: InitiateOnRampRequest
-  ): Promise<CustodialTransaction> {
-    return this.client.post<CustodialTransaction>(
+  ): Promise<ApiResponse<CustodialTransaction>> {
+    return this.client.post<ApiResponse<CustodialTransaction>>(
       '/custodial/on-ramp',
       data
     );
@@ -21,8 +22,8 @@ export class Custodial {
   refreshOnRampTransaction(
     id: string,
     data?: Partial<InitiateOnRampRequest>
-  ): Promise<CustodialTransaction> {
-    return this.client.put<CustodialTransaction>(
+  ): Promise<ApiResponse<CustodialTransaction>> {
+    return this.client.put<ApiResponse<CustodialTransaction>>(
       `/custodial/on-ramp/${id}`,
       data
     );
@@ -30,8 +31,8 @@ export class Custodial {
 
   confirmOnRampTransaction(
     id: string
-  ): Promise<CustodialTransaction> {
-    return this.client.post<CustodialTransaction>(
+  ): Promise<ApiResponse<CustodialTransaction>> {
+    return this.client.post<ApiResponse<CustodialTransaction>>(
       `/custodial/on-ramp/${id}/confirm`,
       {}
     );
@@ -39,8 +40,8 @@ export class Custodial {
 
   initiateOffRampTransaction(
     data: InitiateOffRampRequest
-  ): Promise<CustodialTransaction> {
-    return this.client.post<CustodialTransaction>(
+  ): Promise<ApiResponse<CustodialTransaction>> {
+    return this.client.post<ApiResponse<CustodialTransaction>>(
       '/custodial/off-ramp',
       data
     );
@@ -48,23 +49,23 @@ export class Custodial {
 
   confirmOffRampTransaction(
     id: string
-  ): Promise<CustodialTransaction> {
-    return this.client.post<CustodialTransaction>(
+  ): Promise<ApiResponse<CustodialTransaction>> {
+    return this.client.post<ApiResponse<CustodialTransaction>>(
       `/custodial/off-ramp/${id}/confirm`,
       {}
     );
   }
 
-  getBanksOffRamp(): Promise<BankAccount[]> {
-    return this.client.get<BankAccount[]>(
+  getBanksOffRamp(): Promise<ApiResponse<BankAccount[]>> {
+    return this.client.get<ApiResponse<BankAccount[]>>(
       '/custodial/off-ramp/banks'
     );
   }
 
   addBankAccountOffRamp(
     data: Omit<BankAccount, 'id'>
-  ): Promise<BankAccount> {
-    return this.client.post<BankAccount>(
+  ): Promise<ApiResponse<BankAccount>> {
+    return this.client.post<ApiResponse<BankAccount>>(
       '/custodial/off-ramp/banks',
       data
     );
@@ -72,9 +73,9 @@ export class Custodial {
 
   refreshOffRampTransaction(
     id: string,
-    data?: Partial<InitiateOffRampRequest>
-  ): Promise<CustodialTransaction> {
-    return this.client.put<CustodialTransaction>(
+    data?: Partial<InitiateOnRampRequest>
+  ): Promise<ApiResponse<CustodialTransaction>> {
+    return this.client.put<ApiResponse<CustodialTransaction>>(
       `/custodial/off-ramp/${id}`,
       data
     );

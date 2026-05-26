@@ -1,4 +1,5 @@
 import { HttpClient } from '../client/HttpClient';
+import type { ApiResponse } from '../types';
 import {
   SwapQuotation,
   SwapTransaction,
@@ -12,8 +13,8 @@ export class Swap {
   createSwap(
     userId: string,
     data: CreateSwapRequest
-  ): Promise<SwapQuotation> {
-    return this.client.post<SwapQuotation>(
+  ): Promise<ApiResponse<SwapQuotation>> {
+    return this.client.post<ApiResponse<SwapQuotation>>(
       `/users/${userId}/swap_quotation`,
       data
     );
@@ -22,8 +23,8 @@ export class Swap {
   confirmSwap(
     userId: string,
     quotationId: string
-  ): Promise<SwapTransaction> {
-    return this.client.post<SwapTransaction>(
+  ): Promise<ApiResponse<SwapTransaction>> {
+    return this.client.post<ApiResponse<SwapTransaction>>(
       `/users/${userId}/swap_quotation/${quotationId}/confirm`,
       {}
     );
@@ -33,8 +34,8 @@ export class Swap {
     userId: string,
     quotationId: string,
     data: RefreshSwapRequest
-  ): Promise<SwapQuotation> {
-    return this.client.post<SwapQuotation>(
+  ): Promise<ApiResponse<SwapQuotation>> {
+    return this.client.post<ApiResponse<SwapQuotation>>(
       `/users/${userId}/swap_quotation/${quotationId}/refresh`,
       data
     );
@@ -43,8 +44,8 @@ export class Swap {
   temporarySwapQuotation(
     userId: string,
     data: CreateSwapRequest
-  ): Promise<SwapQuotation> {
-    return this.client.post<SwapQuotation>(
+  ): Promise<ApiResponse<SwapQuotation>> {
+    return this.client.post<ApiResponse<SwapQuotation>>(
       `/users/${userId}/temporary_swap_quotation`,
       data
     );
@@ -53,8 +54,8 @@ export class Swap {
   getSwapTransaction(
     userId: string,
     transactionId: string
-  ): Promise<SwapTransaction> {
-    return this.client.get<SwapTransaction>(
+  ): Promise<ApiResponse<SwapTransaction>> {
+    return this.client.get<ApiResponse<SwapTransaction>>(
       `/users/${userId}/swap_transactions/${transactionId}`
     );
   }
@@ -66,8 +67,8 @@ export class Swap {
       to_currency?: string;
       status?: string;
     }
-  ): Promise<SwapTransaction[]> {
-    return this.client.get<SwapTransaction[]>(
+  ): Promise<ApiResponse<SwapTransaction[]>> {
+    return this.client.get<ApiResponse<SwapTransaction[]>>(
       `/users/${userId}/swap_transactions`,
       { params }
     );

@@ -1,15 +1,21 @@
 import { HttpClient } from '../client/HttpClient';
+import type { ApiResponse } from '../types';
 import { Wallet, PaymentAddress } from '../types';
 
 export class Wallets {
   constructor(private client: HttpClient) {}
 
-  getUserWallets(userId: string): Promise<Wallet[]> {
-    return this.client.get<Wallet[]>(`/users/${userId}/wallets`);
+  getUserWallets(userId: string): Promise<ApiResponse<Wallet[]>> {
+    return this.client.get<ApiResponse<Wallet[]>>(
+      `/users/${userId}/wallets`
+    );
   }
 
-  getUserWallet(userId: string, currency: string): Promise<Wallet> {
-    return this.client.get<Wallet>(
+  getUserWallet(
+    userId: string,
+    currency: string
+  ): Promise<ApiResponse<Wallet>> {
+    return this.client.get<ApiResponse<Wallet>>(
       `/users/${userId}/wallets/${currency.toLowerCase()}`
     );
   }
@@ -17,8 +23,8 @@ export class Wallets {
   getPaymentAddress(
     userId: string,
     currency: string
-  ): Promise<PaymentAddress> {
-    return this.client.get<PaymentAddress>(
+  ): Promise<ApiResponse<PaymentAddress>> {
+    return this.client.get<ApiResponse<PaymentAddress>>(
       `/users/${userId}/wallets/${currency.toLowerCase()}/address`
     );
   }
@@ -26,8 +32,8 @@ export class Wallets {
   getPaymentAddresses(
     userId: string,
     currency: string
-  ): Promise<PaymentAddress[]> {
-    return this.client.get<PaymentAddress[]>(
+  ): Promise<ApiResponse<PaymentAddress[]>> {
+    return this.client.get<ApiResponse<PaymentAddress[]>>(
       `/users/${userId}/wallets/${currency.toLowerCase()}/addresses`
     );
   }
@@ -36,8 +42,8 @@ export class Wallets {
     userId: string,
     currency: string,
     addressId: string
-  ): Promise<PaymentAddress> {
-    return this.client.get<PaymentAddress>(
+  ): Promise<ApiResponse<PaymentAddress>> {
+    return this.client.get<ApiResponse<PaymentAddress>>(
       `/users/${userId}/wallets/${currency.toLowerCase()}/addresses/${addressId}`
     );
   }
@@ -46,8 +52,8 @@ export class Wallets {
     userId: string,
     currency: string,
     network?: string
-  ): Promise<PaymentAddress> {
-    return this.client.post<PaymentAddress>(
+  ): Promise<ApiResponse<PaymentAddress>> {
+    return this.client.post<ApiResponse<PaymentAddress>>(
       `/users/${userId}/wallets/${currency.toLowerCase()}/addresses`,
       undefined,
       network ? { params: { network } } : undefined

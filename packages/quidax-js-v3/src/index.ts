@@ -13,6 +13,7 @@ import { Custodial } from './features/custodial';
 import { isWebhookSignatureValid } from './utils/webhook';
 
 export { QuidaxError, QuidaxApiError } from './client/errors';
+export type { ApiResponse } from './types';
 
 class Quidax {
   users: User;

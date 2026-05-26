@@ -1,4 +1,5 @@
 import { HttpClient } from '../client/HttpClient';
+import type { ApiResponse } from '../types';
 import {
   Withdrawal,
   CreateWithdrawalRequest,
@@ -15,8 +16,8 @@ export class Withdrawals {
       state?: string;
       order_by?: 'asc' | 'desc';
     }
-  ): Promise<Withdrawal[]> {
-    return this.client.get<Withdrawal[]>(
+  ): Promise<ApiResponse<Withdrawal[]>> {
+    return this.client.get<ApiResponse<Withdrawal[]>>(
       `/users/${userId}/withdraws`,
       { params: params as Record<string, string | undefined> }
     );
@@ -25,8 +26,8 @@ export class Withdrawals {
   createWithdrawal(
     userId: string,
     data: CreateWithdrawalRequest
-  ): Promise<Withdrawal> {
-    return this.client.post<Withdrawal>(
+  ): Promise<ApiResponse<Withdrawal>> {
+    return this.client.post<ApiResponse<Withdrawal>>(
       `/users/${userId}/withdraws`,
       data
     );
@@ -35,8 +36,8 @@ export class Withdrawals {
   createBankWithdrawal(
     userId: string,
     data: CreateBankWithdrawalRequest
-  ): Promise<Withdrawal> {
-    return this.client.post<Withdrawal>(
+  ): Promise<ApiResponse<Withdrawal>> {
+    return this.client.post<ApiResponse<Withdrawal>>(
       `/users/${userId}/withdraws`,
       data
     );
@@ -45,8 +46,8 @@ export class Withdrawals {
   getWithdrawalDetail(
     userId: string,
     withdrawalId: string
-  ): Promise<Withdrawal> {
-    return this.client.get<Withdrawal>(
+  ): Promise<ApiResponse<Withdrawal>> {
+    return this.client.get<ApiResponse<Withdrawal>>(
       `/users/${userId}/withdraws/${withdrawalId}`
     );
   }
@@ -54,8 +55,8 @@ export class Withdrawals {
   cancelWithdrawal(
     userId: string,
     withdrawalId: string
-  ): Promise<Withdrawal> {
-    return this.client.post<Withdrawal>(
+  ): Promise<ApiResponse<Withdrawal>> {
+    return this.client.post<ApiResponse<Withdrawal>>(
       `/users/${userId}/withdraws/${withdrawalId}/cancel`,
       {}
     );
@@ -64,8 +65,8 @@ export class Withdrawals {
   getWithdrawalByReference(
     userId: string,
     reference: string
-  ): Promise<Withdrawal> {
-    return this.client.get<Withdrawal>(
+  ): Promise<ApiResponse<Withdrawal>> {
+    return this.client.get<ApiResponse<Withdrawal>>(
       `/users/${userId}/withdraws/reference/${reference}`
     );
   }

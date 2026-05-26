@@ -1,7 +1,7 @@
 {
   "name": "@iamstarcode/quidax-js",
   "author": "iamstarcode",
-  "version": "3.0.0",
+  "version": "3.1.0-beta.2",
   "description": "Quidax API v3 client library for Node.js",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

@@ -19,6 +19,8 @@ export interface SwapTransaction {
   to_currency: string;
   from_amount: string;
   to_amount: string;
+  received_amount?: string;
+  execution_price?: string;
   rate: string;
   status: string;
   created_at: string;

@@ -1,4 +1,5 @@
 import { HttpClient } from '../client/HttpClient';
+import type { ApiResponse } from '../types';
 import {
   RampTransaction,
   PaymentMethod,
@@ -9,49 +10,55 @@ import {
 export class Ramp {
   constructor(private client: HttpClient) {}
 
-  getOffRampTransaction(id: string): Promise<RampTransaction> {
-    return this.client.get<RampTransaction>(`/ramp/off/${id}`);
+  getOffRampTransaction(id: string): Promise<ApiResponse<RampTransaction>> {
+    return this.client.get<ApiResponse<RampTransaction>>(`/ramp/off/${id}`);
   }
 
-  getOnRampTransaction(id: string): Promise<RampTransaction> {
-    return this.client.get<RampTransaction>(`/ramp/on/${id}`);
+  getOnRampTransaction(id: string): Promise<ApiResponse<RampTransaction>> {
+    return this.client.get<ApiResponse<RampTransaction>>(`/ramp/on/${id}`);
   }
 
-  getPaymentMethods(): Promise<PaymentMethod[]> {
-    return this.client.get<PaymentMethod[]>('/ramp/payment_methods');
+  getPaymentMethods(): Promise<ApiResponse<PaymentMethod[]>> {
+    return this.client.get<ApiResponse<PaymentMethod[]>>(
+      '/ramp/payment_methods'
+    );
   }
 
   getPurchaseLimitsBuy(
     currency?: string
-  ): Promise<PurchaseLimit[]> {
-    return this.client.get<PurchaseLimit[]>('/ramp/limits/buy', {
-      params: { currency },
-    });
+  ): Promise<ApiResponse<PurchaseLimit[]>> {
+    return this.client.get<ApiResponse<PurchaseLimit[]>>(
+      '/ramp/limits/buy',
+      { params: { currency } }
+    );
   }
 
   getPurchaseLimitsSell(
     currency?: string
-  ): Promise<PurchaseLimit[]> {
-    return this.client.get<PurchaseLimit[]>('/ramp/limits/sell', {
-      params: { currency },
-    });
+  ): Promise<ApiResponse<PurchaseLimit[]>> {
+    return this.client.get<ApiResponse<PurchaseLimit[]>>(
+      '/ramp/limits/sell',
+      { params: { currency } }
+    );
   }
 
   getPurchaseQuotesBuy(params: {
     currency: string;
     amount: string;
-  }): Promise<PurchaseQuote> {
-    return this.client.get<PurchaseQuote>('/ramp/quotes/buy', {
-      params,
-    });
+  }): Promise<ApiResponse<PurchaseQuote>> {
+    return this.client.get<ApiResponse<PurchaseQuote>>(
+      '/ramp/quotes/buy',
+      { params }
+    );
   }
 
   getPurchaseQuotesSell(params: {
     currency: string;
     amount: string;
-  }): Promise<PurchaseQuote> {
-    return this.client.get<PurchaseQuote>('/ramp/quotes/sell', {
-      params,
-    });
+  }): Promise<ApiResponse<PurchaseQuote>> {
+    return this.client.get<ApiResponse<PurchaseQuote>>(
+      '/ramp/quotes/sell',
+      { params }
+    );
   }
 }

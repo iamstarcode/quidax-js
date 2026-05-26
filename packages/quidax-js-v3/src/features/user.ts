@@ -1,4 +1,5 @@
 import { HttpClient } from '../client/HttpClient';
+import type { ApiResponse } from '../types';
 import {
   SubAccount,
   CreateSubAccountRequest,
@@ -8,26 +9,28 @@ import {
 export class User {
   constructor(private client: HttpClient) {}
 
-  createSubaccount(data: CreateSubAccountRequest): Promise<SubAccount> {
-    return this.client.post<SubAccount>('/users', data);
+  createSubaccount(
+    data: CreateSubAccountRequest
+  ): Promise<ApiResponse<SubAccount>> {
+    return this.client.post<ApiResponse<SubAccount>>('/users', data);
   }
 
-  getParentAccount(): Promise<SubAccount> {
-    return this.client.get<SubAccount>('/users/parent');
+  getParentAccount(): Promise<ApiResponse<SubAccount>> {
+    return this.client.get<ApiResponse<SubAccount>>('/users/parent');
   }
 
-  getSubAccount(userId: string): Promise<SubAccount> {
-    return this.client.get<SubAccount>(`/users/${userId}`);
+  getSubAccount(userId: string): Promise<ApiResponse<SubAccount>> {
+    return this.client.get<ApiResponse<SubAccount>>(`/users/${userId}`);
   }
 
-  getAllSubAccounts(): Promise<SubAccount[]> {
-    return this.client.get<SubAccount[]>('/users');
+  getAllSubAccounts(): Promise<ApiResponse<SubAccount[]>> {
+    return this.client.get<ApiResponse<SubAccount[]>>('/users');
   }
 
   editSubAccount(
     userId: string,
     data: EditSubAccountRequest
-  ): Promise<SubAccount> {
-    return this.client.put<SubAccount>(`/users/${userId}`, data);
+  ): Promise<ApiResponse<SubAccount>> {
+    return this.client.put<ApiResponse<SubAccount>>(`/users/${userId}`, data);
   }
 }

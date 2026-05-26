@@ -8,12 +8,6 @@ interface RequestOptions {
   params?: Record<string, string | undefined>;
 }
 
-interface ApiResponse<T> {
-  status: string;
-  message: string;
-  data: T;
-}
-
 export class HttpClient {
   private baseUrl: string;
   private apiKey?: string;
@@ -94,9 +88,9 @@ export class HttpClient {
       );
     }
 
-    let json: ApiResponse<T>;
     try {
-      json = await response.json();
+      const json = await response.json();
+      return json as T;
     } catch {
       throw new QuidaxApiError(
         `Invalid JSON response from ${method} ${path}`,
@@ -104,7 +98,6 @@ export class HttpClient {
         'INVALID_RESPONSE'
       );
     }
-    return json.data;
   }
 
   async get<T>(

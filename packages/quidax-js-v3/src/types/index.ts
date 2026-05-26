@@ -1,3 +1,9 @@
+export type ApiResponse<T> = {
+  status: string;
+  message: string;
+  data: T;
+};
+
 export * from './user';
 export * from './wallet';
 export * from './market';

@@ -1,4 +1,5 @@
 import { HttpClient } from '../client/HttpClient';
+import type { ApiResponse } from '../types';
 import type { Deposit as DepositData } from '../types';
 
 export class Deposit {
@@ -11,14 +12,20 @@ export class Deposit {
       state?: string;
       order_by?: 'asc' | 'desc';
     }
-  ): Promise<DepositData[]> {
-    return this.client.get<DepositData[]>(`/users/${userId}/deposits`, {
-      params: params as Record<string, string | undefined>,
-    });
+  ): Promise<ApiResponse<DepositData[]>> {
+    return this.client.get<ApiResponse<DepositData[]>>(
+      `/users/${userId}/deposits`,
+      {
+        params: params as Record<string, string | undefined>,
+      }
+    );
   }
 
-  getDeposit(userId: string, depositId: string): Promise<DepositData> {
-    return this.client.get<DepositData>(
+  getDeposit(
+    userId: string,
+    depositId: string
+  ): Promise<ApiResponse<DepositData>> {
+    return this.client.get<ApiResponse<DepositData>>(
       `/users/${userId}/deposits/${depositId}`
     );
   }
@@ -30,8 +37,8 @@ export class Deposit {
       state?: string;
       order_by?: 'asc' | 'desc';
     }
-  ): Promise<DepositData[]> {
-    return this.client.get<DepositData[]>(
+  ): Promise<ApiResponse<DepositData[]>> {
+    return this.client.get<ApiResponse<DepositData[]>>(
       `/users/${userId}/sub_accounts/deposits`,
       {
         params: params as Record<string, string | undefined>,

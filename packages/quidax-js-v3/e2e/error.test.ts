@@ -4,9 +4,9 @@ import Quidax from '../src/index';
 describe('Error handling', () => {
   it('public client methods work without API key', async () => {
     const client = new Quidax();
-    const tickers = await client.markets.getMarketTickers();
-    expect(Array.isArray(tickers)).toBe(true);
-    expect(tickers.length).toBeGreaterThan(0);
+    const res = await client.markets.getMarketTickers();
+    expect(res.status).toBe('success');
+    expect(res.data).toHaveProperty('btcngn');
   });
 
   it('throws when calling authenticated method without API key', async () => {
